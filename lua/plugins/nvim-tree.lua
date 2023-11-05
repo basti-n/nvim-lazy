@@ -1,27 +1,14 @@
 local keymap = vim.keymap
+local ops = {noremap = true, silent = true}
 
-keymap.set('n', '<leader>ex', ':NvimTreeToggle<CR>', {
-    noremap = true
-})
-keymap.set('n', '<leader>ef', ':NvimTreeFindFileToggle<CR>', {
-    noremap = true
-})
-keymap.set('n', '<leader>ff', ':NvimTreeFindFile<CR>', {
-    noremap = true
-})
-keymap.set('n', '<leader>fx', ':NvimTreeFocus<CR>', {
-    noremap = true
-})
+keymap.set('n', '<leader>ex', ':NvimTreeToggle<CR>', opts)
+keymap.set('n', '<leader>ef', ':NvimTreeFindFileToggle<CR>', opts)
+keymap.set('n', '<leader>ff', ':NvimTreeFindFile<CR>', opts)
+keymap.set('n', '<leader>fx', ':NvimTreeFocus<CR>', opts)
 
-keymap.set('n', '<leader>fs+', ':NvimTreeResize +20<CR>', {
-    noremap = true
-})
-keymap.set('n', '<leader>fs-', ':NvimTreeResize -20<CR>', {
-    noremap = true
-})
-keymap.set('n', '<leader>fsb', ':NvimTreeResize 40<CR>', {
-    noremap = true
-})
+keymap.set('n', '<leader>fs+', ':NvimTreeResize +20<CR>', opts)
+keymap.set('n', '<leader>fs-', ':NvimTreeResize -20<CR>', opts)
+keymap.set('n', '<leader>fsb', ':NvimTreeResize 40<CR>', opts)
 
 return {
     "nvim-tree/nvim-tree.lua",
