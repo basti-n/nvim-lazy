@@ -19,3 +19,10 @@ keymap.set("n", "<leader>sh", "<cmd>:split<CR>", opts) -- Split Horizontally
 
 -- Git
 mapkey("<leader>lg", ":LazyGit<CR>", "n")
+
+-- Indenting
+keymap.set("v", "<", "<gv") -- Shift Indentation to Left
+keymap.set("v", ">", ">gv") -- Shift Indentation to Right
+
+-- Show Full File-Path
+mapkey("<leader>pa", "echo expand('%:p')", "n") -- Show Full File Path
