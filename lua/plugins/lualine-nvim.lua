@@ -13,7 +13,6 @@ local config = function()
             theme = theme,
             globalstatus = true,
             icons_enabled = true,
-            theme = base16,
             section_separators = { left = '', right = '' },
             component_separators = { left = '', right = '' },
             disabled_filetypes = {}

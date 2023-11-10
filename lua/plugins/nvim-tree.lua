@@ -1,5 +1,5 @@
 local keymap = vim.keymap
-local ops = {noremap = true, silent = true}
+local opts = {noremap = true, silent = true}
 
 keymap.set('n', '<leader>ex', ':NvimTreeToggle<CR>', opts)
 keymap.set('n', '<leader>ef', ':NvimTreeFindFileToggle<CR>', opts)

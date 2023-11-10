@@ -45,7 +45,7 @@ local config = function()
         builtin.grep_string({ search = vim.fn.input("Grep > ") })
     end)
 
-    -- LSP 
+    -- LSP
     keymap.set('n', '<leader>dw', builtin.diagnostics, {})
     keymap.set('n', '<leader>df', ':Telescope diagnostics bufnr=0<CR>', {})
     keymap.set('n', '<leader>vrr', builtin.lsp_references, {})
