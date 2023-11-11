@@ -7,7 +7,7 @@ opt.termguicolors = true
 opt.colorcolumn = "80"
 opt.signcolumn = "yes"
 opt.scrolloff = 8
-opt.cmdheight = 1
+opt.cmdheight = 0
 opt.completeopt = "menuone,noselect,noinsert"
 
 -- Tab / Indendation
