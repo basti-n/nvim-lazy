@@ -26,3 +26,7 @@ keymap.set("v", ">", ">gv") -- Shift Indentation to Right
 
 -- Show Full File-Path
 mapkey("<leader>pa", "echo expand('%:p')", "n") -- Show Full File Path
+
+-- LSP
+local formatFn = require("util.lsp-format").format
+keymap.set("n", "<leader>f", formatFn, opts) -- Format LSP
