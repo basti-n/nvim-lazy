@@ -52,4 +52,4 @@ local mapkey = function(keymaps, command, vimmode, options)
 	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
-return { mapkey = mapkey }
+return { mapkey = mapkey, opts = default_opts }

@@ -1,8 +1,7 @@
 local mapkey = require("util.keymapper").mapkey
-
 local keymap = vim.keymap
-local opts = { noremap = true, silent = true }
-
+local opts = require("util.keymapper").opts
+--
 -- Copilot
 keymap.set("i", "<C-j>", "copilot#Next()", { expr = true, silent = true })
 keymap.set("i", "<C-k>", "copilot#Previous()", { expr = true, silent = true })
@@ -30,3 +29,6 @@ mapkey("<leader>pa", "echo expand('%:p')", "n") -- Show Full File Path
 -- LSP
 local formatFn = require("util.lsp-format").format
 keymap.set("n", "<leader>f", formatFn, opts) -- Format LSP
+keymap.set({ "n", "v" }, "<leader>fix", ":TypescriptFixAll<CR>", opts)
+keymap.set({ "n", "v" }, "<leader>amp", ":TypescriptAddMissingImports<CR>", opts)
+keymap.set({ "n", "v" }, "<leader>rui", ":TypescriptRemoveUnused<CR>", opts)

@@ -42,29 +42,36 @@ local config = function()
 	})
 
 	-- typescript
-	lspconfig.tsserver.setup({
-		on_attach = on_attach,
-		capabilities = capabilities,
-		filetypes = {
-			"typescript",
+	require("typescript").setup({
+		disable_commands = false, -- prevent the plugin from creating Vim commands
+		debug = false, -- enable debug logging for commands
+		go_to_source_definition = {
+			fallback = true, -- fall back to standard LSP definition on failure
 		},
-		root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+		server = { -- pass options to lspconfig's setup method
+			on_attach = on_attach,
+			capabilities = capabilities,
+			filetypes = {
+				"typescript",
+			},
+			root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+		},
 	})
 
-    local root_dir = lspconfig.util.root_pattern('nx.json', 'package.json')
-    -- angular
-    lspconfig.angularls.setup{
-        root_dir = root_dir
-    }
+	local root_dir = lspconfig.util.root_pattern("nx.json", "package.json")
+	-- angular
+	lspconfig.angularls.setup({
+		root_dir = root_dir,
+	})
 
-    -- eslint
-    lspconfig.eslint.setup{
-        root_dir = root_dir,
-        flags = { debounce_text_changes = 500 },
-        on_attach = function(client)
-            client.server_capabilities.document_formatting = true
-        end,
-    }
+	-- eslint
+	lspconfig.eslint.setup({
+		root_dir = root_dir,
+		flags = { debounce_text_changes = 500 },
+		on_attach = function(client)
+			client.server_capabilities.document_formatting = true
+		end,
+	})
 
 	-- bash
 	lspconfig.bashls.setup({
