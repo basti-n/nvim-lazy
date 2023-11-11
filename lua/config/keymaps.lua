@@ -1,11 +1,11 @@
 local mapkey = require("util.keymapper").mapkey
 
 local keymap = vim.keymap
-local opts = {noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
 
 -- Copilot
-keymap.set("i", "<C-j>", "copilot#Next()", {expr=true, silent=true})
-keymap.set("i", "<C-k>", "copilot#Previous()", {expr=true, silent=true})
+keymap.set("i", "<C-j>", "copilot#Next()", { expr = true, silent = true })
+keymap.set("i", "<C-k>", "copilot#Previous()", { expr = true, silent = true })
 
 -- Pane Navigation
 keymap.set("n", "<C-h>", "<C-w>h", opts) -- Navigate Left
