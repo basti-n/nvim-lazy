@@ -11,9 +11,11 @@ local opts = {
 		"emmet_ls",
 		"jsonls",
         "rust_analyzer",
-        "angularls"
+        "angularls",
+        "prettierd",
+        "eslint_d",
+        "eslint",
 	},
-
 	automatic_installation = true,
 }
 
