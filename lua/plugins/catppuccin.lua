@@ -2,8 +2,9 @@ return {
 	"catppuccin/nvim",
 	lazy = false,
 	name = "catppuccin",
+	transparent_background = true,
 	priority = 1000,
-    config = function()
-        vim.cmd("colorscheme catppuccin")
-    end
+	config = function()
+		vim.cmd("colorscheme catppuccin")
+	end,
 }
