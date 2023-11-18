@@ -105,6 +105,18 @@ local config = function()
 		},
 	})
 
+	-- css
+	lspconfig.cssls.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+		filetypes = {
+			"css",
+			"sass",
+			"scss",
+			"less",
+		},
+	})
+
 	-- docker
 	lspconfig.dockerls.setup({
 		capabilities = capabilities,
@@ -126,6 +138,7 @@ local config = function()
 	local shfmt = require("efmls-configs.formatters.shfmt")
 	local hadolint = require("efmls-configs.linters.hadolint")
 	local solhint = require("efmls-configs.linters.solhint")
+	local stylelint = require("efmls-configs.linters.stylelint")
 	local rustfmt = require("efmls-configs.formatters.rustfmt")
 
 	-- configure efm server
@@ -146,6 +159,8 @@ local config = function()
 			"solidity",
 			"html",
 			"css",
+			"scss",
+			"less",
 			"rust",
 		},
 		init_options = {
@@ -173,6 +188,7 @@ local config = function()
 				solidity = { solhint },
 				html = { prettierd },
 				css = { prettierd },
+				scss = { prettierd, stylelint },
 				rust = { rustfmt },
 			},
 		},
