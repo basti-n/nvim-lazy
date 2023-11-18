@@ -7,10 +7,10 @@ local config = function()
 		autotag = {
 			enable = true,
 		},
-        event = {
-            "BufReadPre",
-            "BufNewFile",
-        },
+		event = {
+			"BufReadPre",
+			"BufNewFile",
+		},
 		ensure_installed = {
 			"markdown",
 			"json",
@@ -23,6 +23,7 @@ local config = function()
 			"bash",
 			"lua",
 			"gitignore",
+			"rust",
 		},
 		auto_install = true,
 		highlight = {
