@@ -11,7 +11,7 @@ local opts = {
 		"emmet_ls",
 		"jsonls",
 		"rust_analyzer",
-		"angularls",
+		"angularls@15.2.0",
 		"prettierd",
 		"eslint_d",
 		"eslint",
