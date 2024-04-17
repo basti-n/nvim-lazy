@@ -19,6 +19,39 @@
   "Console Log": {
     "prefix": "log",
     "description": "console log",
-    "body": ["console.log(${1:log-value});"]
+    "body": [
+      "console.log(${1:log-value});"
+    ]
+  },
+  "JSDoc": {
+    "prefix": "jsd",
+    "description": "JSDoc",
+    "body": [
+      "/**",
+      " * ${1:Description}",
+      " */"
+    ]
+  },
+  "JSDoc FN": {
+    "prefix": "jsdf",
+    "description": "JSDoc",
+    "body": [
+      "/**",
+      " * ${1:Description}",
+      " * @param {${2:type}} ${3:variable} - ${4:Description}",
+      " * @returns {${5:type}} - ${6:Description}",
+      " */"
+    ]
+  },
+  "JSDoc FN Async": {
+    "prefix": "jsdfa",
+    "description": "JSDoc Async",
+    "body": [
+      "/**",
+      " * ${1:Description}",
+      " * @param {${2:type}} ${3:variable} - ${4:Description}",
+      " * @returns {Promise<${5:type}>} - ${6:Description}",
+      " */"
+    ]
   }
 }

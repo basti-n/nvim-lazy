@@ -68,7 +68,9 @@
   "Angular Default Route Path": {
     "prefix": "a-route-path-default",
     "description": "Angular default route path",
-    "body": ["{ path: '', pathMatch: 'full', redirectTo: '${1:path}' },$0"]
+    "body": [
+      "{ path: '', pathMatch: 'full', redirectTo: '${1:path}' },$0"
+    ]
   },
   "Angular Route Path with Children": {
     "prefix": "a-route-path-with-children",
@@ -86,12 +88,16 @@
   "Angular 404 Route Path": {
     "prefix": "a-route-path-404",
     "description": "Angular 404 route path",
-    "body": ["{ path: '**', component: ${1:PathNotFoundComponent} },$0"]
+    "body": [
+      "{ path: '**', component: ${1:PathNotFoundComponent} },$0"
+    ]
   },
   "Angular Eager Route Path": {
     "prefix": "a-route-path-eager",
     "description": "Angular eager route path",
-    "body": ["{ path: '${1:path}', component: ${2:Name}Component },$0"]
+    "body": [
+      "{ path: '${1:path}', component: ${2:Name}Component },$0"
+    ]
   },
   "Angular Lazy Route Path": {
     "prefix": "a-route-path-lazy",
@@ -116,7 +122,9 @@
   "HttpClient.get": {
     "prefix": "a-httpclient-get",
     "description": "Angular HttpClient.get",
-    "body": ["return this.httpClient.get('${1:url}');$0"]
+    "body": [
+      "return this.httpClient.get('${1:url}');$0"
+    ]
   },
   "Angular HttpClient Service": {
     "prefix": "a-service-httpclient",
@@ -197,7 +205,9 @@
   },
   "Output Event": {
     "prefix": "a-output-event",
-    "body": ["@Output() ${1:eventName} = new EventEmitter<${2:eventType}>();"],
+    "body": [
+      "@Output() ${1:eventName} = new EventEmitter<${2:eventType}>();"
+    ],
     "description": "Angular @Output event and emitter"
   },
   "Subscribe": {
@@ -451,12 +461,18 @@
   "RxJs Import": {
     "prefix": "a-rxjs-import",
     "description": "RxJs import",
-    "body": ["import { ${1:Observable} } from 'rxjs';", "$0"]
+    "body": [
+      "import { ${1:Observable} } from 'rxjs';",
+      "$0"
+    ]
   },
   "RxJs Operator Import": {
     "prefix": "a-rxjs-operator-import",
     "description": "RxJs import",
-    "body": ["import { ${1:map} } from 'rxjs/operators';", "$0"]
+    "body": [
+      "import { ${1:map} } from 'rxjs/operators';",
+      "$0"
+    ]
   },
   "Angular Resolver": {
     "prefix": "a-resolver",
@@ -573,7 +589,9 @@
   "NgRx Data Import Entity Data Module": {
     "prefix": "a-ngrx-data-entity-data-module-import",
     "description": "Import NgRx Entity Data Module",
-    "body": ["EntityDataModule.forRoot(${1:entityConfig}),"]
+    "body": [
+      "EntityDataModule.forRoot(${1:entityConfig}),"
+    ]
   },
   "NgRx Data Entity Metadata": {
     "prefix": "a-ngrx-data-entity-metadata",
@@ -621,6 +639,39 @@
   "Console Log": {
     "prefix": "log",
     "description": "console log",
-    "body": ["console.log(${1:log-value});"]
+    "body": [
+      "console.log(${1:log-value});"
+    ]
+  },
+  "JSDoc": {
+    "prefix": "jsd",
+    "description": "JSDoc",
+    "body": [
+      "/**",
+      " * ${1:Description}",
+      " */"
+    ]
+  },
+  "JSDoc FN": {
+    "prefix": "jsdf",
+    "description": "JSDoc",
+    "body": [
+      "/**",
+      " * ${1:Description}",
+      " * @param {${2:type}} ${3:variable} - ${4:Description}",
+      " * @returns {${5:type}} - ${6:Description}",
+      " */"
+    ]
+  },
+  "JSDoc FN Async": {
+    "prefix": "jsdfa",
+    "description": "JSDoc Async",
+    "body": [
+      "/**",
+      " * ${1:Description}",
+      " * @param {${2:type}} ${3:variable} - ${4:Description}",
+      " * @returns {Promise<${5:type}>} - ${6:Description}",
+      " */"
+    ]
   }
 }
