@@ -29,9 +29,9 @@ mapkey("<leader>pa", "echo expand('%:p')", "n") -- Show Full File Path
 -- LSP
 local formatFn = require("util.lsp-format").format
 keymap.set("n", "<leader>f", formatFn, opts) -- Format LSP
-keymap.set({ "n", "v" }, "<leader>fix", ":TypescriptFixAll<CR>", opts)
-keymap.set({ "n", "v" }, "<leader>amp", ":TypescriptAddMissingImports<CR>", opts)
-keymap.set({ "n", "v" }, "<leader>rui", ":TypescriptRemoveUnused<CR>", opts)
+keymap.set({ "n", "v" }, "<leader>fix", ":TSToolsFixAll<CR>", opts)
+keymap.set({ "n", "v" }, "<leader>amp", ":TSToolsAddMissingImports<CR>", opts)
+keymap.set({ "n", "v" }, "<leader>rui", ":TSToolsRemoveUnusedImports<CR>", opts)
 
 -- Experimental
-keymap.set({'i', 'v'}, 'jk', '<Esc>', opts) -- Exit Insert Mode
+keymap.set({ "i", "v" }, "jk", "<Esc>", opts) -- Exit Insert Mode
