@@ -1,7 +1,7 @@
 local mapkey = require("util.keymapper").mapkey
 local keymap = vim.keymap
 local opts = require("util.keymapper").opts
---
+
 -- Copilot
 keymap.set("i", "<C-j>", "copilot#Next()", { expr = true, silent = true })
 keymap.set("i", "<C-k>", "copilot#Previous()", { expr = true, silent = true })
@@ -29,9 +29,15 @@ mapkey("<leader>pa", "echo expand('%:p')", "n") -- Show Full File Path
 -- LSP
 local formatFn = require("util.lsp-format").format
 keymap.set("n", "<leader>f", formatFn, opts) -- Format LSP
-keymap.set({ "n", "v" }, "<leader>fix", ":TypescriptFixAll<CR>", opts)
-keymap.set({ "n", "v" }, "<leader>amp", ":TypescriptAddMissingImports<CR>", opts)
-keymap.set({ "n", "v" }, "<leader>rui", ":TypescriptRemoveUnused<CR>", opts)
+keymap.set({ "n", "v" }, "<leader>fix", ":TSToolsFixAll<CR>", opts)
+keymap.set({ "n", "v" }, "<leader>amp", ":TSToolsAddMissingImports<CR>", opts)
+keymap.set({ "n", "v" }, "<leader>rui", ":TSToolsRemoveUnusedImports<CR>", opts)
 
 -- Experimental
-keymap.set({'i', 'v'}, 'jk', '<Esc>', opts) -- Exit Insert Mode
+keymap.set({ "i", "v" }, "jk", "<Esc>", opts) -- Exit Insert Mode
+
+-- Move Lines (Up/Down)
+keymap.set("n", "K", ":m .-2<CR>==", { noremap = true, silent = true })
+keymap.set("n", "J", ":m .+1<CR>==", { noremap = true, silent = true })
+keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
+keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true })

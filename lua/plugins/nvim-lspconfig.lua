@@ -42,19 +42,12 @@ local config = function()
 	})
 
 	-- typescript
-	require("typescript").setup({
-		disable_commands = false, -- prevent the plugin from creating Vim commands
-		debug = false, -- enable debug logging for commands
-		go_to_source_definition = {
-			fallback = true, -- fall back to standard LSP definition on failure
-		},
-		server = { -- pass options to lspconfig's setup method
-			on_attach = on_attach,
-			capabilities = capabilities,
-			filetypes = {
-				"typescript",
-			},
-			root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
+	require("typescript-tools").setup({
+		root_dir = lspconfig.util.root_pattern("nx.json", "tsconfig.json", "package.json", ".git"),
+		on_attach = on_attach,
+		capabilities = capabilities,
+		settings = {
+			tsserver_plugins = { "@monodon/typescript-nx-imports-plugin" },
 		},
 	})
 
