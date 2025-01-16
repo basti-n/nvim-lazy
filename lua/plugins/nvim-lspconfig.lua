@@ -114,6 +114,7 @@ local config = function()
 	lspconfig.dockerls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
+        filetypes = { "dockerfile", "dockerfile_template", "Dockerfile-*" },
 	})
 
 	-- rust
@@ -185,6 +186,8 @@ local config = function()
 			},
 		},
 	})
+
+    vim.cmd [[autocmd BufRead,BufNewFile Dockerfile-* set filetype=dockerfile]]
 end
 
 return {
