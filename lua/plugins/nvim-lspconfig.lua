@@ -114,6 +114,7 @@ local config = function()
 	lspconfig.dockerls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
+        filetypes = { "dockerfile", "dockerfile_template", "Dockerfile-*" },
 	})
 
 	-- rust
