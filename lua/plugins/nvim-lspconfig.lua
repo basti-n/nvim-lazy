@@ -186,6 +186,8 @@ local config = function()
 			},
 		},
 	})
+
+    vim.cmd [[autocmd BufRead,BufNewFile Dockerfile-* set filetype=dockerfile]]
 end
 
 return {
