@@ -79,6 +79,19 @@ local config = function()
 		filetypes = { "solidity" },
 	})
 
+	-- eslint
+	require("lspconfig").eslint.setup({
+		settings = {
+			packageManager = "npm",
+		},
+		on_attach = function(_client, bufnr)
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				buffer = bufnr,
+				command = "EslintFixAll",
+			})
+		end,
+	})
+
 	-- html, typescriptreact, javascriptreact, css, sass, scss, less, svelte, vue
 	lspconfig.emmet_ls.setup({
 		capabilities = capabilities,
@@ -113,7 +126,7 @@ local config = function()
 	lspconfig.dockerls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
-        filetypes = { "dockerfile", "dockerfile_template", "Dockerfile-*" },
+		filetypes = { "dockerfile", "dockerfile_template", "Dockerfile-*" },
 	})
 
 	-- rust
@@ -124,7 +137,6 @@ local config = function()
 
 	local luacheck = require("efmls-configs.linters.luacheck")
 	local stylua = require("efmls-configs.formatters.stylua")
-	local eslint_d = require("efmls-configs.linters.eslint_d")
 	local prettierd = require("efmls-configs.formatters.prettier_d")
 	local shellcheck = require("efmls-configs.linters.shellcheck")
 	local shfmt = require("efmls-configs.formatters.shfmt")
@@ -165,28 +177,26 @@ local config = function()
 		},
 		settings = {
 			languages = {
-				lua = { luacheck, stylua },
-				typescript = { eslint_d, prettierd },
-				json = { eslint_d },
-				jsonc = { eslint_d },
-				sh = { shellcheck, shfmt },
-				javascript = { eslint_d, prettierd },
-				javascriptreact = { eslint_d, prettierd },
-				typescriptreact = { eslint_d, prettierd },
-				svelte = { eslint_d, prettierd },
-				vue = { eslint_d, prettierd },
-				markdown = { prettierd },
-				docker = { hadolint, prettierd },
-				solidity = { solhint },
-				html = { prettierd },
-				css = { prettierd },
-				scss = { prettierd, stylelint },
-				rust = { rustfmt },
+                lua = { luacheck, stylua },
+                typescript = { prettierd },
+                sh = { shellcheck, shfmt },
+                javascript = { prettierd },
+                javascriptreact = { prettierd },
+                typescriptreact = { prettierd },
+                svelte = { prettierd },
+                vue = { prettierd },
+                markdown = { prettierd },
+                docker = { hadolint, prettierd },
+                solidity = { solhint },
+                html = { prettierd },
+                css = { prettierd },
+                scss = { prettierd, stylelint },
+                rust = { rustfmt },
 			},
 		},
 	})
 
-    vim.cmd [[autocmd BufRead,BufNewFile Dockerfile-* set filetype=dockerfile]]
+	vim.cmd([[autocmd BufRead,BufNewFile Dockerfile-* set filetype=dockerfile]])
 end
 
 return {
