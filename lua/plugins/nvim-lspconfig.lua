@@ -44,7 +44,26 @@ local config = function()
 	local root_dir = lspconfig.util.root_pattern("nx.json", "package.json")
 	-- angular
 	lspconfig.angularls.setup({
-		root_dir = root_dir,
+        cmd = {
+            "ngserver",
+            "--stdio",
+            "--tsProbeLocations",
+            "/usr/local/lib",
+            "--ngProbeLocations",
+            "/usr/local/lib",
+        },
+        on_new_config = function(new_config, new_root_dir)
+            new_config.cmd = {
+                "ngserver",
+                "--stdio",
+                "--tsProbeLocations",
+                new_root_dir,
+                "--ngProbeLocations",
+                new_root_dir,
+            }
+        end,
+        filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" },
+        root_dir = root_dir,
 	})
 
 	-- eslint
