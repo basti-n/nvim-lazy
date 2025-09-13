@@ -49,6 +49,7 @@ local config = function()
     -- LSP
     keymap.set('n', '<leader>dw', builtin.diagnostics, {})
     keymap.set('n', '<leader>df', ':Telescope diagnostics bufnr=0<CR>', {})
+    keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'LSP Code Action' })
     keymap.set('n', '<leader>vrr', builtin.lsp_references, {})
 
     -- Quickfix (cdo)

@@ -40,20 +40,30 @@ local config = function()
 		filetypes = { "json", "jsonc" },
 	})
 
-	-- typescript
-	require("typescript-tools").setup({
-		root_dir = lspconfig.util.root_pattern("nx.json", "tsconfig.json", "package.json", ".git"),
-		on_attach = on_attach,
-		capabilities = capabilities,
-		settings = {
-			tsserver_plugins = { "@monodon/typescript-nx-imports-plugin" },
-		},
-	})
 
 	local root_dir = lspconfig.util.root_pattern("nx.json", "package.json")
 	-- angular
 	lspconfig.angularls.setup({
-		root_dir = root_dir,
+        cmd = {
+            "ngserver",
+            "--stdio",
+            "--tsProbeLocations",
+            "/usr/local/lib",
+            "--ngProbeLocations",
+            "/usr/local/lib",
+        },
+        on_new_config = function(new_config, new_root_dir)
+            new_config.cmd = {
+                "ngserver",
+                "--stdio",
+                "--tsProbeLocations",
+                new_root_dir,
+                "--ngProbeLocations",
+                new_root_dir,
+            }
+        end,
+        filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" },
+        root_dir = root_dir,
 	})
 
 	-- eslint
@@ -77,6 +87,33 @@ local config = function()
 		capabilities = capabilities,
 		on_attach = on_attach,
 		filetypes = { "solidity" },
+	})
+
+    -- html
+    lspconfig.html.setup({
+		capabilities = capabilities,
+		on_attach = on_attach,
+        filetypes = { "html" },
+    })
+
+	-- eslint
+	require("lspconfig").eslint.setup({
+        root_dir = lspconfig.util.root_pattern("eslint.config.cjs", "package.json", ".git"),
+		settings = {
+			packageManager = "npm",
+		},
+        filetypes = {
+            "javascript", "javascriptreact", "javascript.jsx",
+            "typescript", "typescriptreact", "typescript.tsx",
+            "vue", "svelte", "astro",
+            "html", "htmlangular"
+        },
+		on_attach = function(_client, bufnr)
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				buffer = bufnr,
+				command = "EslintFixAll",
+			})
+		end,
 	})
 
 	-- html, typescriptreact, javascriptreact, css, sass, scss, less, svelte, vue
@@ -113,7 +150,7 @@ local config = function()
 	lspconfig.dockerls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
-        filetypes = { "dockerfile", "dockerfile_template", "Dockerfile-*" },
+		filetypes = { "dockerfile", "dockerfile_template", "Dockerfile-*" },
 	})
 
 	-- rust
@@ -124,14 +161,14 @@ local config = function()
 
 	local luacheck = require("efmls-configs.linters.luacheck")
 	local stylua = require("efmls-configs.formatters.stylua")
-	local eslint_d = require("efmls-configs.linters.eslint_d")
-	local prettierd = require("efmls-configs.formatters.prettier_d")
+	local prettier = require("efmls-configs.formatters.prettier_d")
 	local shellcheck = require("efmls-configs.linters.shellcheck")
 	local shfmt = require("efmls-configs.formatters.shfmt")
 	local hadolint = require("efmls-configs.linters.hadolint")
 	local solhint = require("efmls-configs.linters.solhint")
 	local stylelint = require("efmls-configs.linters.stylelint")
 	local rustfmt = require("efmls-configs.formatters.rustfmt")
+    local eslint = require("efmls-configs.linters.eslint")
 
 	-- configure efm server
 	lspconfig.efm.setup({
@@ -154,6 +191,7 @@ local config = function()
 			"scss",
 			"less",
 			"rust",
+            "htmlangular"
 		},
 		init_options = {
 			documentFormatting = true,
@@ -166,27 +204,33 @@ local config = function()
 		settings = {
 			languages = {
 				lua = { luacheck, stylua },
-				typescript = { eslint_d, prettierd },
-				json = { eslint_d },
-				jsonc = { eslint_d },
-				sh = { shellcheck, shfmt },
-				javascript = { eslint_d, prettierd },
-				javascriptreact = { eslint_d, prettierd },
-				typescriptreact = { eslint_d, prettierd },
-				svelte = { eslint_d, prettierd },
-				vue = { eslint_d, prettierd },
-				markdown = { prettierd },
-				docker = { hadolint, prettierd },
+				typescript = { prettier, eslint },
+                sh = { shellcheck, shfmt },
+                javascript = { prettier, eslint },
+                javascriptreact = { prettier, eslint },
+                typescriptreact = { prettier, eslint },
+                svelte = { prettier },
+				vue = { prettier },
+				markdown = { prettier },
+				docker = { hadolint, prettier },
 				solidity = { solhint },
-				html = { prettierd },
-				css = { prettierd },
-				scss = { prettierd, stylelint },
+				html = { prettier, eslint },
+                htmlangular = { prettier, eslint },
+                css = { prettier },
+				scss = { prettier, stylelint },
 				rust = { rustfmt },
 			},
+            rootMarkers = { "eslint.config.cjs", "package.json" },
 		},
 	})
 
-    vim.cmd [[autocmd BufRead,BufNewFile Dockerfile-* set filetype=dockerfile]]
+	vim.cmd([[autocmd BufRead,BufNewFile Dockerfile-* set filetype=dockerfile]])
+    vim.api.nvim_create_autocmd("FileType", {
+        pattern = "htmlangular",
+        callback = function()
+            vim.bo.filetype = "html"
+        end,
+    })
 end
 
 return {
